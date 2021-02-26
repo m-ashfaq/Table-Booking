@@ -1,55 +1,40 @@
 const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
+const session = require("express-session");
+
+// Import all routers
+const internalRouter = require("./routes/internalRoutes");
+const BookingRouter = require("./routes/bookingRoutes");
+const userRouter = require("./routes/userRoutes");
+
+mongoose.connect("mongodb://localhost:27017/tableBookingApp", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+// Initialise app object
 const app = express();
 
-//importing internal routers
+// This is the port your application will use
+const port = 5000;
 
-const timingRouter = require("./Routes/timingRoutes");
-
-const port = 3000;
-
+// Add middleware to be able to read and understand json files
 app.use(express.json());
+app.use(cors()); // CORS // Cross Origin Resource Sharing
+app.use(
+  session({
+    secret: "random secret",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
 
-app.get("/", (req, res) => res.send("Hello World"));
+// Tell express that it needs to use the routers we have initialised
+app.use("/internal", internalRouter);
+app.use("/api/booking", BookingRouter);
+app.use("/api/users", userRouter);
 
-//health check rout
-
-app.get("/health", (req, res) => res.send("Health is OK"));
-
-//smoke test
-
-app.get("/smoketest", (req, res) => res.send("Smoke test is OK"));
-
-//booking routes
-app.get("/booking", (req, res) => res.send("Welcome to the booking routes"));
-
-//internal routes
-app.use("/timing", timingRouter);
-
-//by Id
-
-app.get("/booking:id", (req, res) => {
-  console.log(req.params.id);
-  res.send("OK");
-});
-
-app.post("/new-booking", (req, res) => {
-  console.log(req.body);
-  res.send("OK");
-});
-
-app.patch("/booking/update/:id", (req, res) => {
-  console.log(req.params.id);
-  console.log(req.body);
-  res.send(
-    `Object with id :${req.params.id} has been changed to ${JSON.stringify(
-      req.body
-    )}`
-  );
-});
-
-app.delete("/booking/delete/:id", (req, res) => {
-  console.log(req.params.id);
-  res.send(`This object with id: ${req.params.id} has been deleted`);
-});
-
-app.listen(port, () => console.log(`app is Listning at http://localhost:3000`));
+app.listen(port, () =>
+  console.log(`Fruit app is listening at http://localhost:${port}`)
+);
