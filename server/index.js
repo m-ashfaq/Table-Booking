@@ -36,5 +36,5 @@ app.use("/api/booking", BookingRouter);
 app.use("/api/users", userRouter);
 
 app.listen(port, () =>
-  console.log(`Fruit app is listening at http://localhost:${port}`)
+  console.log(`Booking app is listening at http://localhost:${port}`)
 );

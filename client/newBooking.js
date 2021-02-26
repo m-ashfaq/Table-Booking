@@ -52,13 +52,13 @@ const newBooking = () => {
       time: $("#time").val(),
     };
 
-    const response = $.ajax({
-      type: "POST",
-      url: "/api/booking/new-booking",
-      contentType: "application/json",
-      data: JSON.stringify(requestBody),
-    });
     // const response = $.ajax({
+    //   type: "POST",
+    //   url: "/api/booking/new-booking",
+    //   contentType: "application/json",
+    //   data: JSON.stringify(requestBody),
+    // });
+    // // const response = $.ajax({
     //   type: "POST",
     //   url: "http://localhost:5000/booking/new-booking",
     //   contentType: "application/json",
@@ -81,12 +81,12 @@ const newBooking = () => {
       });
 
       // Make a PATCH request to the server to update a fruit
-      // const response = await $.ajax({
-      //     type: "PATCH",
-      //     url: `/api/booking/patch-booking/${$("#bookingId").val()}`,
-      //     contentType: "application/json",
-      //     data: JSON.stringify(requestBody),
-      //     });
+      const response = await $.ajax({
+        type: "PATCH",
+        url: `/api/booking/patch-booking/${$("#bookingId").val()}`,
+        contentType: "application/json",
+        data: JSON.stringify(requestBody),
+      });
 
       // Create a pop up alert in the UI to inform the user that fruit was updated
       window.alert("Booking Updated!");
