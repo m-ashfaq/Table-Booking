@@ -20,8 +20,8 @@ router.post("/new-booking", (request, response) => {
   response.send("This Booking was created Succefully");
 });
 //patch
-router.patch("/update-booking/:id", (request, response) => {
-  BookingModel.findByIdAndUpdate(request.params.id, request.body, {
+router.patch("/patch-booking/:id", (request, response) => {
+  BookingModel.findByIdAndUpdate(request.params.id, requestBody, {
     new: true,
     upsert: true,
   })

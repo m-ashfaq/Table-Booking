@@ -935,11 +935,11 @@ var newBooking = function newBooking() {
                 response = _context.sent;
                 // Make a PATCH request to the server to update a fruit
                 // const response = await $.ajax({
-                //     type: "PATCH",
-                //     url: `/api/booking/patch-booking/${$("#bookingId").val()}`,
-                //     contentType: "application/json",
-                //     data: JSON.stringify(requestBody),
-                //     });
+                //   type: "PATCH",
+                //   url: `/api/booking/patch-booking/${$("#bookingId").val()}`,
+                //   contentType: "application/json",
+                //   data: JSON.stringify(requestBody),
+                // });
                 // Create a pop up alert in the UI to inform the user that fruit was updated
                 window.alert("Booking Updated!");
 
@@ -963,6 +963,129 @@ var newBooking = function newBooking() {
 
 var _default = newBooking;
 exports.default = _default;
+},{}],"user/newUser.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+var form = "\n  <form id=\"new-user\">\n    <div class=\"form-group\">\n      <label for=\"username\">Username</label>\n      <input type=\"text\" class=\"form-control\" placeholder=\"Please enter username\" name=\"username\">\n    </div>\n    <div class=\"form-group\">\n      <label for=\"password\">Password</label>\n      <input type=\"password\" class=\"form-control\" placeholder=\"Please enter password\" name=\"password\">\n    </div>\n    <button type=\"submit\" class=\"btn btn-primary\">Sign Up</button>\n  </form>\n";
+
+var newUser = function newUser() {
+  $(document).on("submit", "#new-user", /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(event) {
+      var formData, response;
+      return regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              console.log("event", event);
+              event.preventDefault();
+              formData = {
+                username: $("input[name='username']").val(),
+                password: $("input[name='password']").val()
+              };
+              console.log("formData", formData);
+              _context.next = 6;
+              return $.ajax({
+                type: "POST",
+                url: "/api/users/register",
+                contentType: "application/json",
+                data: JSON.stringify(formData)
+              });
+
+            case 6:
+              response = _context.sent;
+              console.log("response", response);
+
+            case 8:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function (_x) {
+      return _ref.apply(this, arguments);
+    };
+  }());
+  return form;
+};
+
+var _default = newUser;
+exports.default = _default;
+},{}],"user/loginUser.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+// import newUser from "./newUser";
+// import newBooking from "../newBooking";
+
+/*
+I've added a button in this form to allow a first time user to register
+Clicking on the Register New User button loads the newUser.js form
+*/
+var form = "\n  <form id=\"login-user\">\n    <div class=\"form-group\">\n      <label for=\"username\">Username</label>\n      <input type=\"text\" class=\"form-control\" placeholder=\"Please enter username\" name=\"username\">\n    </div>\n    <div class=\"form-group\">\n      <label for=\"password\">Password</label>\n      <input type=\"password\" class=\"form-control\" placeholder=\"Please enter password\" name=\"password\">\n    </div>\n    <button type=\"submit\" class=\"btn btn-primary\">Log in</button>\n  </form>\n";
+
+var loginUser = function loginUser() {
+  $(document).on("submit", "#login-user", /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(event) {
+      var formData, response;
+      return regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              console.log("event", event);
+              event.preventDefault();
+              formData = {
+                username: $("input[name='username']").val(),
+                password: $("input[name='password']").val()
+              };
+              console.log("formData", formData);
+              _context.next = 6;
+              return $.ajax({
+                type: "POST",
+                url: "/api/users/login",
+                contentType: "application/json",
+                data: JSON.stringify(formData)
+              });
+
+            case 6:
+              response = _context.sent;
+              console.log("response", response);
+
+            case 8:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function (_x) {
+      return _ref.apply(this, arguments);
+    };
+  }());
+  return form;
+};
+
+var _default = loginUser;
+exports.default = _default;
 },{}],"app.js":[function(require,module,exports) {
 "use strict";
 
@@ -970,11 +1093,17 @@ require("regenerator-runtime/runtime");
 
 var _newBooking = _interopRequireDefault(require("./newBooking"));
 
+var _newUser = _interopRequireDefault(require("./user/newUser"));
+
+var _loginUser = _interopRequireDefault(require("./user/loginUser"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 console.log("Check if this works");
 $("body").prepend((0, _newBooking.default)());
-},{"regenerator-runtime/runtime":"node_modules/regenerator-runtime/runtime.js","./newBooking":"newBooking.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+$("body").prepend((0, _newUser.default)());
+$("body").prepend((0, _loginUser.default)());
+},{"regenerator-runtime/runtime":"node_modules/regenerator-runtime/runtime.js","./newBooking":"newBooking.js","./user/newUser":"user/newUser.js","./user/loginUser":"user/loginUser.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -1002,7 +1131,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51390" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53134" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
